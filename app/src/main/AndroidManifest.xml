@@ -2,6 +2,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="io.qhacks.mentalstate">
 
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+        package="com.google.android.gms.location.sample.basiclocationsample" >
+
+        <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    </manifest>
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -40,6 +48,18 @@
         </LinearLayout>
         </activity>
 
+<<<<<<< HEAD
+=======
+        <receiver android:name=".DailyPollManager"
+            android:exported="true" >
+            <!--
+            <intent-filter android:priority="1000" >
+                <action android:name="android.provider.Telephony.SMS_RECEIVED" />
+            </intent-filter>
+            -->
+        </receiver>
+
+>>>>>>> bf9b87c39f5203fbc194e0ba3f5243a3e38d59b0
     </application>
 
 </manifest>
