@@ -48,8 +48,6 @@
         </LinearLayout>
         </activity>
 
-<<<<<<< HEAD
-=======
         <receiver android:name=".DailyPollManager"
             android:exported="true" >
             <!--
@@ -58,8 +56,6 @@
             </intent-filter>
             -->
         </receiver>
-
->>>>>>> bf9b87c39f5203fbc194e0ba3f5243a3e38d59b0
     </application>
 
 </manifest>
