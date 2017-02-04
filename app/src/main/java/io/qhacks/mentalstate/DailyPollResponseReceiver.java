@@ -4,9 +4,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 
-/**
- * Created by benwi on 2017-02-04.
- */
 public class DailyPollResponseReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {

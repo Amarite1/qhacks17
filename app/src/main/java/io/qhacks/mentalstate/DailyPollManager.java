@@ -12,9 +12,6 @@ import android.graphics.drawable.Icon;
 
 import java.util.Calendar;
 
-/**
- * Created by benwi on 2017-02-04.
- */
 public class DailyPollManager extends BroadcastReceiver {
 
     private final static int NOTIFICATION_ID = 20417;
