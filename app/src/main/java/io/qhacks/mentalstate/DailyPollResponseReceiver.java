@@ -3,30 +3,22 @@ package io.qhacks.mentalstate;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
-import android.support.annotation.Nullable;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
+
 import java.io.FileWriter;
 import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 
-import static android.R.attr.data;
 
 
 public class DailyPollResponseReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         int responseType = intent.getExtras().getInt("type");
-        String FILENAME = "data.txt";
+
         switch(responseType){
 
             case 0:{ //bad day
