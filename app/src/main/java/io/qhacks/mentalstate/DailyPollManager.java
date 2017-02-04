@@ -19,9 +19,9 @@ public class DailyPollManager extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         Intent responseIntent = new Intent(context, DailyPollResponseReceiver.class);
-        responseIntent.putExtra("type", 0);
-        PendingIntent pig = PendingIntent.getBroadcast(context, 0, responseIntent, 0);
         responseIntent.putExtra("type", 1);
+        PendingIntent pig = PendingIntent.getBroadcast(context, 0, responseIntent, 0);
+        responseIntent.putExtra("type", 0);
         PendingIntent pib = PendingIntent.getBroadcast(context, 0, responseIntent, 0);
 
         Notification.Action goodAction = new Notification.Action.Builder(R.mipmap.ic_launcher, "Good", pig).build();
