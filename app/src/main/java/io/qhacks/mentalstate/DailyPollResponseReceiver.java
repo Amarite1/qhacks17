@@ -37,7 +37,6 @@ public class DailyPollResponseReceiver extends BroadcastReceiver {
                         System.out.println (strLine);
                         i++;
                     }
-
 //Close the input stream
                     br.close();
                     String Data = "";

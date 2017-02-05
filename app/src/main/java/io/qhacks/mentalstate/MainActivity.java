@@ -1,14 +1,17 @@
 package io.qhacks.mentalstate;
 
+import android.content.res.AssetManager;
+import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileInputStream;
-
-import java.io.FileWriter;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.Scanner;
+
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
@@ -36,51 +39,70 @@ public class MainActivity extends AppCompatActivity {
 //        String[] myDataset = {"Notifications"};
 //        mAdapter = new MyAdapter(myDataset);
 //        mRecyclerView.setAdapter(mAdapter);
+        //String path = Environment.getExternalStorageDirectory().getAbsolutePath()+ "/data.txt";
+
+
         try {
-            FileInputStream fstream = new FileInputStream("data.txt");
-            BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
+            InputStream file = getResources().openRawResource(
+                    R.raw.dat);
+            System.out.println("Opened");
+            Scanner scanner = new Scanner(file);
             String strLine = "";
             int i= 0;
-            //String[] arrStr = new String [i];
 
-            while ((strLine = br.readLine()) != null) {
+            String s = "";
+            while (scanner.hasNextLine()) {
+                 s = scanner.next();
                 i++;
+                System.out.println(s);
             }
-
-
-            FileInputStream fstream2 = new FileInputStream("data.txt");
-            BufferedReader br2 = new BufferedReader(new InputStreamReader(fstream2));
-            String[] arrStr = new String [i];
-
-            while ((strLine = br2.readLine()) != null) {
+            System.out.println("closed");
+            scanner.close();
+            System.out.println("closed");
+            String arrStr [] = new String[(i+1)*2];
+            file = getResources().openRawResource(
+                    R.raw.dat);
+            scanner = new Scanner(file);
+            i = 0;
+            while (scanner.hasNextLine()) {
+                strLine = scanner.next();
                 arrStr[i] = strLine;
                 i++;
+
             }
+            scanner.close();
+            System.out.println("second close");
+            final int j = i - 20;
 
+            int a[]=new int[21];
+            int b[]=new int[21];
 
-            FileInputStream fstream3 = new FileInputStream("data.txt");
-            BufferedReader br3 = new BufferedReader(new InputStreamReader(fstream3));
-            final int j = i - 14;
-
-            int a[]=new int[14];
-            int b[]=new int[14];
-            while(i>j )
+            while(j<i && i > 1)
 
             {
-                String dat = arrStr[i];
-                if (arrStr[i] != null) {
+
+                if(arrStr[i] != null && arrStr[i-1] != null) {
+                    System.out.println("third while");
+                    String dat = arrStr[i];
+                    System.out.println(dat);
                     a[i] = Integer.parseInt(Character.toString(dat.charAt(0)));
-                    b[i] = Integer.parseInt(Character.toString(dat.charAt(2)));
+                    i--;
+                    dat = arrStr[i];
+                    b[i] = Integer.parseInt(Character.toString(dat.charAt(0)));
+                    System.out.println(b[i]);
                 }
                 else{
                     a[i] = 0;
+                    i--;
                     b[i] = 0;
                 }
                 i--;
-
             }
+            System.out.println("At bottom of 3");
+
             GraphView graph = (GraphView) findViewById(R.id.graph);
             LineGraphSeries<DataPoint> series = new LineGraphSeries<>(new DataPoint[] {
+
                 new DataPoint(a[1],b[1]),
                 new DataPoint(a[2],b[2]),
                 new DataPoint(a[3],b[3]),
@@ -94,18 +116,23 @@ public class MainActivity extends AppCompatActivity {
                 new DataPoint(a[11],b[11]),
                 new DataPoint(a[12],b[12]),
                 new DataPoint(a[13],b[13]),
-                new DataPoint(a[14],b[14])
+                new DataPoint(a[14],b[14]),
+                    new DataPoint(a[15],b[15]),
+                    new DataPoint(a[16],b[16]),
+                    new DataPoint(a[17],b[17]),
+                    new DataPoint(a[18],b[18]),
+                    new DataPoint(a[19],b[19]),
+                    new DataPoint(a[20],b[20])
+
             });
+            System.out.println("Data");
             graph.addSeries(series);
 
 //Read File Line By Line
         }
-        catch (java.io.FileNotFoundException e){
-            e.printStackTrace();
-        }
-        catch (java.io.IOException e){
-            e.printStackTrace();
-        }
+       catch (Exception e){
+           e.printStackTrace();
+       }
 
 
 }
