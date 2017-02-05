@@ -72,6 +72,10 @@ public class MainActivity extends AppCompatActivity {
             }
             LineGraphSeries<DataPoint> series = new LineGraphSeries<>(dataPoints);
             GraphView graph = (GraphView) findViewById(R.id.graph);
+            graph.getViewport().setMinX(json.getJSONObject(0).getInt("date"));
+            graph.getViewport().setMaxX(json.getJSONObject(json.length()-1).getInt("date"));
+            graph.getViewport().setMinY(-0.5);
+            graph.getViewport().setMaxY(1.5);
             graph.addSeries(series);
         } catch (JSONException e) {
             e.printStackTrace();
@@ -81,13 +85,7 @@ public class MainActivity extends AppCompatActivity {
             DailyPollManager.enableNotifications(this, 21);
             prefs.edit().putBoolean("enabled", true);
         }
-        GraphView graph = (GraphView) findViewById(R.id.graph);
-        LineGraphSeries<DataPoint> series = new LineGraphSeries<>(new DataPoint[] {
-                new DataPoint(0, 1),
-                new DataPoint(1, 1),
-                new DataPoint(2, 0)
-        });
-        graph.addSeries(series);
+
 
         Button goodButton = (Button) findViewById(R.id.goodbutton);
         goodButton.setOnClickListener(new View.OnClickListener() {
