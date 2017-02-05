@@ -154,9 +154,6 @@ public class MainActivity extends AppCompatActivity {
        }
 
 
-}
-
-
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         if(!prefs.getBoolean("enabled", false)) {
             DailyPollManager.enableNotifications(this, 21);

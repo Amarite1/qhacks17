@@ -26,10 +26,12 @@ public class DailyPollResponseReceiver extends BroadcastReceiver {
         int responseType = intent.getExtras().getInt("type");
         Log.d("DPRR", "response: " + responseType);
 
+        NetWorker nw = new NetWorker();
+        nw.sendResponse(responseType);
+
         switch(responseType){
 
             case 0:{ //bad day
-                //todo: send to server
 
                 try{
                     FileInputStream fstream = new FileInputStream("data.txt");
@@ -66,7 +68,6 @@ public class DailyPollResponseReceiver extends BroadcastReceiver {
                 }
             }
             case 1:{ //good day
-                //todo: send to server
 
                 try{
                     FileInputStream fstream = new FileInputStream("data.txt");

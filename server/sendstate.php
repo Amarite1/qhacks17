@@ -13,7 +13,7 @@ if($mysqli->connect_errno){ //if we couldn't connect
 	return; //we're done here
 }
 
-if(isset($_POST['user']) && isset($_POST['date']) && isset($_POST['type'])){
+if(isset($_POST['user']) && isset($_POST['type'])){
 	$datearr = getdate();
 	$date = $datearr['mday']*1000000 + $datearr['month']*1000 + $datearr['year'];
 	$user = mysql_real_escape_string($_POST['user']);
