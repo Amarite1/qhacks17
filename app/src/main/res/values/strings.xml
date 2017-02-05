@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Mental State</string>
+    <string name="app_name">BrainAssist</string>
 
     <string name="notif_title">How was your day?</string>
     <string name="notif_content">Let us know how your day went, we hope it was good!</string>

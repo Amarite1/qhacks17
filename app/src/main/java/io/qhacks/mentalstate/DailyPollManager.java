@@ -14,7 +14,7 @@ import java.util.Calendar;
 
 public class DailyPollManager extends BroadcastReceiver {
 
-    private final static int NOTIFICATION_ID = 20417;
+    public final static int NOTIFICATION_ID = 20417;
 
     @Override
     public void onReceive(Context context, Intent intent) {

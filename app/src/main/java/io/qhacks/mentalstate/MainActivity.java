@@ -1,10 +1,17 @@
 package io.qhacks.mentalstate;
 
+
 import android.content.res.AssetManager;
 import android.os.Environment;
+
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
+
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -12,6 +19,15 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Scanner;
 
+import android.os.Bundle;
+import android.app.Activity;
+import android.content.Intent;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.widget.Button;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
@@ -20,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
+
+    private Context _this = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
 //        String[] myDataset = {"Notifications"};
 //        mAdapter = new MyAdapter(myDataset);
 //        mRecyclerView.setAdapter(mAdapter);
+
         //String path = Environment.getExternalStorageDirectory().getAbsolutePath()+ "/data.txt";
 
 
@@ -136,6 +155,41 @@ public class MainActivity extends AppCompatActivity {
 
 
 }
+
+
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        if(!prefs.getBoolean("enabled", false)) {
+            DailyPollManager.enableNotifications(this, 21);
+            prefs.edit().putBoolean("enabled", true);
+        }
+        GraphView graph = (GraphView) findViewById(R.id.graph);
+        LineGraphSeries<DataPoint> series = new LineGraphSeries<>(new DataPoint[] {
+                new DataPoint(0, 1),
+                new DataPoint(1, 1),
+                new DataPoint(2, 0)
+        });
+        graph.addSeries(series);
+
+        Button goodButton = (Button) findViewById(R.id.goodbutton);
+        goodButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(_this, DailyPollResponseReceiver.class);
+                intent.putExtra("type", 1);
+                sendBroadcast(intent);
+            }
+        });
+
+        Button badButton = (Button) findViewById(R.id.button4);
+        badButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(_this, DailyPollResponseReceiver.class);
+                intent.putExtra("type", 0);
+                sendBroadcast(intent);
+            }
+        });
+    }
 
 }
 
