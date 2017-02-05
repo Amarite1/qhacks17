@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
 //        mAdapter = new MyAdapter(myDataset);
 //        mRecyclerView.setAdapter(mAdapter);
 
-        
+       DailyPollManager.enableNotifications(this, 21);
 
         GraphView graph = (GraphView) findViewById(R.id.graph);
         LineGraphSeries<DataPoint> series = new LineGraphSeries<>(new DataPoint[] {

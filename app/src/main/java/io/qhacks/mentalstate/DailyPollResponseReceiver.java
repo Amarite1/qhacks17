@@ -1,8 +1,10 @@
 package io.qhacks.mentalstate;
 
+import android.app.NotificationManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 
 
 import java.io.BufferedReader;
@@ -17,7 +19,12 @@ import java.io.InputStreamReader;
 public class DailyPollResponseReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
+
+        NotificationManager nm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+        nm.cancel(DailyPollManager.NOTIFICATION_ID);
+
         int responseType = intent.getExtras().getInt("type");
+        Log.d("DPRR", "response: " + responseType);
 
         switch(responseType){
 
